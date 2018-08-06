@@ -19,7 +19,7 @@ pin-utils = "0.1.0-alpha.1"
 Next, add this to your crate:
 
 ```rust
-#[macro_use ]extern crate pin_utils;
+#[macro_use] extern crate pin_utils;
 ```
 
 # License
