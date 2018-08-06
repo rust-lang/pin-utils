@@ -1,0 +1,34 @@
+language: rust
+rust:
+  - nightly
+sudo: false
+cache: cargo
+
+matrix:
+  include:
+    - name: cargo test
+      os: osx
+
+    - name: cargo test
+      os: linux
+
+    - name: cargo clippy
+      rust: nightly
+      install:
+        - rustup component add clippy-preview
+      script:
+        - cargo clippy -- -Dwarnings
+
+    - name: cargo doc
+      rust: nightly
+      script:
+        - RUSTDOCFLAGS=-Dwarnings cargo doc
+
+script:
+  - cargo build
+  - cargo test
+  - cargo test --release
+
+notifications:
+  email:
+    on_success: never
