@@ -26,7 +26,7 @@
 /// impl<T: Unpin> Unpin for Foo<T> {} // Conditional Unpin impl
 /// ```
 ///
-/// [`Unpin`]: std::marker::Unpin
+/// [`Unpin`]: core::marker::Unpin
 /// [`drop`]: Drop::drop
 #[macro_export]
 macro_rules! unsafe_pinned {
