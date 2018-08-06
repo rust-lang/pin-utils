@@ -3,7 +3,7 @@
 Utilities for pinning
 
 [![Build Status](https://travis-ci.org/rust-lang-nursery/pin-utils.svg?branch=master)](https://travis-ci.org/rust-lang-nursery/pin-utils)
-[![Crates.io](https://img.shields.io/crates/v/futures.svg?maxAge=2592000)](https://crates.io/crates/pin-utils)
+[![Crates.io](https://img.shields.io/crates/v/pin-utils.svg?maxAge=2592000)](https://crates.io/crates/pin-utils)
 
 [Documentation](https://docs.rs/pin-utils)
 
