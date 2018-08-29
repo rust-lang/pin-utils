@@ -14,10 +14,13 @@ matrix:
 
     - name: cargo clippy
       rust: nightly
-      install:
-        - rustup component add clippy-preview
       script:
-        - cargo clippy -- -Dwarnings
+        - if rustup component add clippy-preview;
+          then
+            cargo clippy -- -Dwarnings;
+          else
+            echo 'Skipping clippy';
+          fi
 
     - name: cargo doc
       rust: nightly
