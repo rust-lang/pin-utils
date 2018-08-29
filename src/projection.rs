@@ -9,8 +9,8 @@
 /// ```
 /// # #![feature(pin, arbitrary_self_types)]
 /// # #[macro_use] extern crate pin_utils;
-/// # use std::mem::PinMut;
 /// # use std::marker::Unpin;
+/// # use std::pin::PinMut;
 /// struct Foo<T> {
 ///     field: T,
 /// }
@@ -32,10 +32,10 @@
 macro_rules! unsafe_pinned {
     ($f:tt: $t:ty) => (
         fn $f<'__a>(
-            self: &'__a mut $crate::core_reexport::mem::PinMut<Self>
-        ) -> $crate::core_reexport::mem::PinMut<'__a, $t> {
+            self: &'__a mut $crate::core_reexport::pin::PinMut<Self>
+        ) -> $crate::core_reexport::pin::PinMut<'__a, $t> {
             unsafe {
-                $crate::core_reexport::mem::PinMut::map_unchecked(
+                $crate::core_reexport::pin::PinMut::map_unchecked(
                     self.reborrow(), |x| &mut x.$f
                 )
             }
@@ -53,7 +53,7 @@ macro_rules! unsafe_pinned {
 /// ```
 /// # #![feature(pin, arbitrary_self_types)]
 /// # #[macro_use] extern crate pin_utils;
-/// # use std::mem::PinMut;
+/// # use std::pin::PinMut;
 /// # struct Bar;
 /// struct Foo {
 ///     field: Bar,
@@ -71,10 +71,10 @@ macro_rules! unsafe_pinned {
 macro_rules! unsafe_unpinned {
     ($f:tt: $t:ty) => (
         fn $f<'__a>(
-            self: &'__a mut $crate::core_reexport::mem::PinMut<Self>
+            self: &'__a mut $crate::core_reexport::pin::PinMut<Self>
         ) -> &'__a mut $t {
             unsafe {
-                &mut $crate::core_reexport::mem::PinMut::get_mut_unchecked(
+                &mut $crate::core_reexport::pin::PinMut::get_mut_unchecked(
                     self.reborrow()
                 ).$f
             }

@@ -1,6 +1,6 @@
 #![feature(pin)]
 #[macro_use] extern crate pin_utils;
-use core::mem::PinMut;
+use core::pin::PinMut;
 
 #[test]
 fn stack_pin() {
