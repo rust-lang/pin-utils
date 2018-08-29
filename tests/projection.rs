@@ -1,7 +1,7 @@
 #![feature(pin, arbitrary_self_types)]
 #[macro_use] extern crate pin_utils;
-use std::mem::PinMut;
 use std::marker::Unpin;
+use std::pin::PinMut;
 
 struct Foo<T1, T2> {
     field1: T1,
