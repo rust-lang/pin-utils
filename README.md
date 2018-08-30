@@ -16,10 +16,10 @@ First, add this to your `Cargo.toml`:
 pin-utils = "0.1.0-alpha.1"
 ```
 
-Next, add this to your crate:
+Now, you can use it:
 
 ```rust
-#[macro_use] extern crate pin_utils;
+use pin_utils::pin_mut; // And more...
 ```
 
 # License

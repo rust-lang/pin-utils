@@ -2,7 +2,7 @@
 ///
 /// ```
 /// # #![feature(pin)]
-/// # #[macro_use] extern crate pin_utils;
+/// # use pin_utils::pin_mut;
 /// # use core::pin::PinMut;
 /// # struct Foo {}
 /// let foo = Foo { /* ... */ };

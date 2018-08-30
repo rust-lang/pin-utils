@@ -1,5 +1,5 @@
 #![feature(pin, arbitrary_self_types)]
-#[macro_use] extern crate pin_utils;
+use pin_utils::{unsafe_pinned, unsafe_unpinned, pin_mut};
 use std::pin::PinMut;
 use std::marker::Unpin;
 
