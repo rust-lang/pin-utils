@@ -8,7 +8,7 @@
 ///
 /// ```
 /// # #![feature(pin, arbitrary_self_types)]
-/// # #[macro_use] extern crate pin_utils;
+/// # use pin_utils::unsafe_pinned;
 /// # use std::pin::PinMut;
 /// # use std::marker::Unpin;
 /// struct Foo<T> {
@@ -52,7 +52,7 @@ macro_rules! unsafe_pinned {
 ///
 /// ```
 /// # #![feature(pin, arbitrary_self_types)]
-/// # #[macro_use] extern crate pin_utils;
+/// # use pin_utils::unsafe_unpinned;
 /// # use std::pin::PinMut;
 /// # struct Bar;
 /// struct Foo {
