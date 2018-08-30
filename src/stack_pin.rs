@@ -3,7 +3,7 @@
 /// ```
 /// # #![feature(pin)]
 /// # #[macro_use] extern crate pin_utils;
-/// # use core::mem::PinMut;
+/// # use core::pin::PinMut;
 /// # struct Foo {}
 /// let foo = Foo { /* ... */ };
 /// pin_mut!(foo);
@@ -18,7 +18,7 @@ macro_rules! pin_mut {
         // ever again.
         #[allow(unused_mut)]
         let mut $x = unsafe {
-            $crate::core_reexport::mem::PinMut::new_unchecked(&mut $x)
+            $crate::core_reexport::pin::PinMut::new_unchecked(&mut $x)
         };
     )* }
 }
