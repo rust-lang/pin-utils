@@ -9,7 +9,7 @@
 /// ```
 /// # #![feature(pin, arbitrary_self_types)]
 /// # use pin_utils::unsafe_pinned;
-/// # use std::pin::PinMut;
+/// # use std::pin::Pin;
 /// # use std::marker::Unpin;
 /// struct Foo<T> {
 ///     field: T,
@@ -18,8 +18,8 @@
 /// impl<T> Foo<T> {
 ///     unsafe_pinned!(field: T);
 ///
-///     fn baz(mut self: PinMut<Self>) {
-///         let _: PinMut<T> = self.field(); // Pinned reference to the field
+///     fn baz(mut self: Pin<&mut Self>) {
+///         let _: Pin<&mut T> = self.field(); // Pinned reference to the field
 ///     }
 /// }
 ///
@@ -32,11 +32,11 @@
 macro_rules! unsafe_pinned {
     ($f:tt: $t:ty) => (
         fn $f<'__a>(
-            self: &'__a mut $crate::core_reexport::pin::PinMut<Self>
-        ) -> $crate::core_reexport::pin::PinMut<'__a, $t> {
+            self: &'__a mut $crate::core_reexport::pin::Pin<&mut Self>
+        ) -> $crate::core_reexport::pin::Pin<&'__a mut $t> {
             unsafe {
-                $crate::core_reexport::pin::PinMut::map_unchecked(
-                    self.reborrow(), |x| &mut x.$f
+                $crate::core_reexport::pin::Pin::map_unchecked_mut(
+                    self.as_mut(), |x| &mut x.$f
                 )
             }
         }
@@ -53,7 +53,7 @@ macro_rules! unsafe_pinned {
 /// ```
 /// # #![feature(pin, arbitrary_self_types)]
 /// # use pin_utils::unsafe_unpinned;
-/// # use std::pin::PinMut;
+/// # use std::pin::Pin;
 /// # struct Bar;
 /// struct Foo {
 ///     field: Bar,
@@ -62,7 +62,7 @@ macro_rules! unsafe_pinned {
 /// impl Foo {
 ///     unsafe_unpinned!(field: Bar);
 ///
-///     fn baz(mut self: PinMut<Self>) {
+///     fn baz(mut self: Pin<&mut Self>) {
 ///         let _: &mut Bar = self.field(); // Normal reference to the field
 ///     }
 /// }
@@ -71,11 +71,11 @@ macro_rules! unsafe_pinned {
 macro_rules! unsafe_unpinned {
     ($f:tt: $t:ty) => (
         fn $f<'__a>(
-            self: &'__a mut $crate::core_reexport::pin::PinMut<Self>
+            self: &'__a mut $crate::core_reexport::pin::Pin<&mut Self>
         ) -> &'__a mut $t {
             unsafe {
-                &mut $crate::core_reexport::pin::PinMut::get_mut_unchecked(
-                    self.reborrow()
+                &mut $crate::core_reexport::pin::Pin::get_mut_unchecked(
+                    self.as_mut()
                 ).$f
             }
         }

@@ -1,6 +1,6 @@
 #![feature(pin, arbitrary_self_types)]
 use pin_utils::{unsafe_pinned, unsafe_unpinned, pin_mut};
-use std::pin::PinMut;
+use std::pin::Pin;
 use std::marker::Unpin;
 
 struct Foo<T1, T2> {
@@ -20,7 +20,7 @@ fn projection() {
     let foo = Foo { field1: 1, field2: 2 };
     pin_mut!(foo);
 
-    let x1: PinMut<i32> = foo.field1();
+    let x1: Pin<&mut i32> = foo.field1();
     assert_eq!(*x1, 1);
 
     let x2: &mut i32 = foo.field2();
