@@ -3,11 +3,11 @@
 /// ```
 /// # #![feature(pin)]
 /// # use pin_utils::pin_mut;
-/// # use core::pin::PinMut;
+/// # use core::pin::Pin;
 /// # struct Foo {}
 /// let foo = Foo { /* ... */ };
 /// pin_mut!(foo);
-/// let _: PinMut<Foo> = foo;
+/// let _: Pin<&mut Foo> = foo;
 /// ```
 #[macro_export]
 macro_rules! pin_mut {
@@ -18,7 +18,7 @@ macro_rules! pin_mut {
         // ever again.
         #[allow(unused_mut)]
         let mut $x = unsafe {
-            $crate::core_reexport::pin::PinMut::new_unchecked(&mut $x)
+            $crate::core_reexport::pin::Pin::new_unchecked(&mut $x)
         };
     )* }
 }
