@@ -8,10 +8,10 @@
 /// - The struct must not be `#[repr(packed)]`.
 ///
 /// ```
-/// # #![feature(arbitrary_self_types)]
-/// # use pin_utils::unsafe_pinned;
-/// # use std::pin::Pin;
-/// # use std::marker::Unpin;
+/// use pin_utils::unsafe_pinned;
+/// use std::marker::Unpin;
+/// use std::pin::Pin;
+///
 /// struct Foo<T> {
 ///     field: T,
 /// }
@@ -27,17 +27,20 @@
 /// impl<T: Unpin> Unpin for Foo<T> {} // Conditional Unpin impl
 /// ```
 ///
+/// Note that borrowing the field multiple times requires using `.as_mut()` to
+/// avoid consuming the `Pin`.
+///
 /// [`Unpin`]: core::marker::Unpin
 /// [`drop`]: Drop::drop
 #[macro_export]
 macro_rules! unsafe_pinned {
     ($f:tt: $t:ty) => (
         fn $f<'__a>(
-            self: &'__a mut $crate::core_reexport::pin::Pin<&mut Self>
+            self: $crate::core_reexport::pin::Pin<&'__a mut Self>
         ) -> $crate::core_reexport::pin::Pin<&'__a mut $t> {
             unsafe {
                 $crate::core_reexport::pin::Pin::map_unchecked_mut(
-                    self.as_mut(), |x| &mut x.$f
+                    self, |x| &mut x.$f
                 )
             }
         }
@@ -51,11 +54,14 @@ macro_rules! unsafe_pinned {
 /// that the contained value can be considered not pinned in the current
 /// context.
 ///
+/// Note that borrowing the field multiple times requires using `.as_mut()` to
+/// avoid consuming the `Pin`.
+///
 /// ```
-/// # #![feature(arbitrary_self_types)]
-/// # use pin_utils::unsafe_unpinned;
-/// # use std::pin::Pin;
-/// # struct Bar;
+/// use pin_utils::unsafe_unpinned;
+/// use std::pin::Pin;
+///
+/// struct Bar;
 /// struct Foo {
 ///     field: Bar,
 /// }
@@ -72,12 +78,10 @@ macro_rules! unsafe_pinned {
 macro_rules! unsafe_unpinned {
     ($f:tt: $t:ty) => (
         fn $f<'__a>(
-            self: &'__a mut $crate::core_reexport::pin::Pin<&mut Self>
+            self: $crate::core_reexport::pin::Pin<&'__a mut Self>
         ) -> &'__a mut $t {
             unsafe {
-                &mut $crate::core_reexport::pin::Pin::get_unchecked_mut(
-                    self.as_mut()
-                ).$f
+                &mut $crate::core_reexport::pin::Pin::get_unchecked_mut(self).$f
             }
         }
     )
