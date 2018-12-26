@@ -1,9 +1,7 @@
-cargo-features = ["edition"]
-
 [package]
 name = "pin-utils"
 edition = "2018"
-version = "0.1.0-alpha.3"
+version = "0.1.0-alpha.4"
 authors = ["Josef Brandl <mail@josefbrandl.de>"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
