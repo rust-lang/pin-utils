@@ -1,7 +1,5 @@
 //! Utilities for pinning
 
-#![feature(pin)]
-
 #![no_std]
 #![warn(missing_docs, missing_debug_implementations)]
 #![deny(bare_trait_objects)]

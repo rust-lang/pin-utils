@@ -1,4 +1,3 @@
-#![feature(pin)]
 use pin_utils::pin_mut;
 use core::pin::Pin;
 
