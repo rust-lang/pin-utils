@@ -1,7 +1,6 @@
 /// Pins a value on the stack.
 ///
 /// ```
-/// # #![feature(pin)]
 /// # use pin_utils::pin_mut;
 /// # use core::pin::Pin;
 /// # struct Foo {}

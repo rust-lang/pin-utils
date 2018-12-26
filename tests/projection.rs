@@ -1,4 +1,4 @@
-#![feature(pin, arbitrary_self_types)]
+#![feature(arbitrary_self_types)]
 use pin_utils::{unsafe_pinned, unsafe_unpinned, pin_mut};
 use std::pin::Pin;
 use std::marker::Unpin;

@@ -7,7 +7,7 @@
 ///   The struct can only implement [`Unpin`] if the field's type is [`Unpin`].
 ///
 /// ```
-/// # #![feature(pin, arbitrary_self_types)]
+/// # #![feature(arbitrary_self_types)]
 /// # use pin_utils::unsafe_pinned;
 /// # use std::pin::Pin;
 /// # use std::marker::Unpin;
@@ -51,7 +51,7 @@ macro_rules! unsafe_pinned {
 /// context.
 ///
 /// ```
-/// # #![feature(pin, arbitrary_self_types)]
+/// # #![feature(arbitrary_self_types)]
 /// # use pin_utils::unsafe_unpinned;
 /// # use std::pin::Pin;
 /// # struct Bar;
@@ -74,7 +74,7 @@ macro_rules! unsafe_unpinned {
             self: &'__a mut $crate::core_reexport::pin::Pin<&mut Self>
         ) -> &'__a mut $t {
             unsafe {
-                &mut $crate::core_reexport::pin::Pin::get_mut_unchecked(
+                &mut $crate::core_reexport::pin::Pin::get_unchecked_mut(
                     self.as_mut()
                 ).$f
             }
