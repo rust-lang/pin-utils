@@ -22,6 +22,8 @@ Now, you can use it:
 use pin_utils::pin_mut; // And more...
 ```
 
+The current version of pin-utils requires Rust nightly 2018-12-26 or later.
+
 # License
 
 This project is licensed under either of
