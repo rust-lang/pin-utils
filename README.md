@@ -13,7 +13,7 @@ First, add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-pin-utils = "0.1.0-alpha.3"
+pin-utils = "0.1.0-alpha.4"
 ```
 
 Now, you can use it:
