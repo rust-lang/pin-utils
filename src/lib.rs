@@ -9,6 +9,7 @@
 
 #[doc(hidden)]
 pub mod core_reexport {
+    #[doc(hidden)]
     pub use core::*;
 }
 
