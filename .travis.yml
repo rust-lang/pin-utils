@@ -6,15 +6,19 @@ cache: cargo
 
 matrix:
   include:
+    # This is the minimum Rust version supported by pin-utils.
+    # When updating this, the reminder to update the minimum required version in README.md.
+    - name: cargo test (minimum required version)
+      rust: 1.33.0
+
+    - name: cargo +stable test
+      rust: stable
+
     - name: cargo test
       os: osx
 
     - name: cargo test
       os: linux
-
-    # When updating this, the reminder to update the minimum required version in README.md.
-    - name: cargo test (minimum required version)
-      rust: nightly-2018-12-26
 
     - name: cargo clippy
       rust: nightly
