@@ -5,7 +5,7 @@
 #![deny(bare_trait_objects)]
 #![allow(unknown_lints)]
 
-#![doc(html_root_url = "https://docs.rs/pin-utils/0.1.0-alpha.2")]
+#![doc(html_root_url = "https://docs.rs/pin-utils/0.1.0-alpha.4")]
 
 #[doc(hidden)]
 pub mod core_reexport {
