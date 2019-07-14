@@ -10,7 +10,7 @@
 /// ```
 #[macro_export]
 macro_rules! pin_mut {
-    ($($x:ident),*) => { $(
+    ($($x:ident),* $(,)?) => { $(
         // Move the value to ensure that it is owned
         let mut $x = $x;
         // Shadow the original binding so that it can't be directly accessed
