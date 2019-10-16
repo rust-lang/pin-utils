@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)] // pin_mut! is completely safe.
+
 use pin_utils::pin_mut;
 use core::pin::Pin;
 
