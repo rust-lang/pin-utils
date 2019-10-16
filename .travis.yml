@@ -21,14 +21,10 @@ matrix:
       os: linux
 
     - name: cargo clippy
-      rust: nightly
+      rust: stable
       script:
-        - if rustup component add clippy-preview;
-          then
-            cargo clippy -- -Dwarnings;
-          else
-            echo 'Skipping clippy';
-          fi
+        - rustup component add clippy
+        - cargo clippy -- -Dwarnings
 
     - name: cargo doc
       rust: nightly
