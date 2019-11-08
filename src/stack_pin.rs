@@ -1,6 +1,8 @@
 /// Pins a value on the stack.
 ///
-/// ```
+/// # Example
+///
+/// ```rust
 /// # use pin_utils::pin_mut;
 /// # use core::pin::Pin;
 /// # struct Foo {}
@@ -17,7 +19,7 @@ macro_rules! pin_mut {
         // ever again.
         #[allow(unused_mut)]
         let mut $x = unsafe {
-            $crate::core_reexport::pin::Pin::new_unchecked(&mut $x)
+            ::core::pin::Pin::new_unchecked(&mut $x)
         };
     )* }
 }
