@@ -41,10 +41,10 @@ macro_rules! unsafe_pinned {
     ($f:tt: $t:ty) => (
         #[allow(unsafe_code)]
         fn $f<'__a>(
-            self: ::core::pin::Pin<&'__a mut Self>
-        ) -> ::core::pin::Pin<&'__a mut $t> {
+            self: $crate::core_reexport::pin::Pin<&'__a mut Self>
+        ) -> $crate::core_reexport::pin::Pin<&'__a mut $t> {
             unsafe {
-                ::core::pin::Pin::map_unchecked_mut(
+                $crate::core_reexport::pin::Pin::map_unchecked_mut(
                     self, |x| &mut x.$f
                 )
             }
