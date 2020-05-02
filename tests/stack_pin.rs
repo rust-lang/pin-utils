@@ -1,7 +1,7 @@
 #![forbid(unsafe_code)] // pin_mut! is completely safe.
 
-use pin_utils::pin_mut;
 use core::pin::Pin;
+use pin_utils::pin_mut;
 
 #[test]
 fn stack_pin() {
@@ -12,10 +12,7 @@ fn stack_pin() {
 
     let bar = Foo {};
     let baz = Foo {};
-    pin_mut!(
-        bar,
-        baz,
-    );
+    pin_mut!(bar, baz,);
     let _: Pin<&mut Foo> = bar;
     let _: Pin<&mut Foo> = baz;
 }
