@@ -38,18 +38,14 @@
 /// [`drop`]: Drop::drop
 #[macro_export]
 macro_rules! unsafe_pinned {
-    ($f:tt: $t:ty) => (
+    ($f:tt: $t:ty) => {
         #[allow(unsafe_code)]
         fn $f<'__a>(
-            self: $crate::core_reexport::pin::Pin<&'__a mut Self>
+            self: $crate::core_reexport::pin::Pin<&'__a mut Self>,
         ) -> $crate::core_reexport::pin::Pin<&'__a mut $t> {
-            unsafe {
-                $crate::core_reexport::pin::Pin::map_unchecked_mut(
-                    self, |x| &mut x.$f
-                )
-            }
+            unsafe { $crate::core_reexport::pin::Pin::map_unchecked_mut(self, |x| &mut x.$f) }
         }
-    )
+    };
 }
 
 /// An unpinned projection of a struct field.
@@ -87,14 +83,10 @@ macro_rules! unsafe_pinned {
 /// [`Pin`]: core::pin::Pin
 #[macro_export]
 macro_rules! unsafe_unpinned {
-    ($f:tt: $t:ty) => (
+    ($f:tt: $t:ty) => {
         #[allow(unsafe_code)]
-        fn $f<'__a>(
-            self: $crate::core_reexport::pin::Pin<&'__a mut Self>
-        ) -> &'__a mut $t {
-            unsafe {
-                &mut $crate::core_reexport::pin::Pin::get_unchecked_mut(self).$f
-            }
+        fn $f<'__a>(self: $crate::core_reexport::pin::Pin<&'__a mut Self>) -> &'__a mut $t {
+            unsafe { &mut $crate::core_reexport::pin::Pin::get_unchecked_mut(self).$f }
         }
-    )
+    };
 }
