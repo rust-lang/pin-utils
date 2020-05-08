@@ -6,13 +6,13 @@ use pin_utils::pin_mut;
 #[test]
 fn stack_pin() {
     struct Foo {}
-    let foo = Foo {};
-    pin_mut!(foo);
-    let _: Pin<&mut Foo> = foo;
+    let x = Foo {};
+    pin_mut!(x);
+    let _: Pin<&mut Foo> = x;
 
-    let bar = Foo {};
-    let baz = Foo {};
-    pin_mut!(bar, baz,);
-    let _: Pin<&mut Foo> = bar;
-    let _: Pin<&mut Foo> = baz;
+    let y = Foo {};
+    let z = Foo {};
+    pin_mut!(y, z,);
+    let _: Pin<&mut Foo> = y;
+    let _: Pin<&mut Foo> = z;
 }
