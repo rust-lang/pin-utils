@@ -41,7 +41,7 @@ jobs:
       - name: Install Rust
         run: rustup update stable && rustup default stable
       - name: cargo clippy
-        run: cargo clippy
+        run: cargo clippy --all --all-targets
 
   rustfmt:
     name: rustfmt

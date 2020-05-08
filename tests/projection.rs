@@ -16,15 +16,15 @@ impl<T1: Unpin, T2> Unpin for Foo<T1, T2> {} // Conditional Unpin impl
 
 #[test]
 fn projection() {
-    let foo = Foo {
+    let x = Foo {
         field1: 1,
         field2: 2,
     };
-    pin_mut!(foo);
+    pin_mut!(x);
 
-    let x1: Pin<&mut i32> = foo.as_mut().field1();
+    let x1: Pin<&mut i32> = x.as_mut().field1();
     assert_eq!(*x1, 1);
 
-    let x2: &mut i32 = foo.as_mut().field2();
+    let x2: &mut i32 = x.as_mut().field2();
     assert_eq!(*x2, 2);
 }
