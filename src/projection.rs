@@ -36,6 +36,10 @@
 ///
 /// [`Unpin`]: core::marker::Unpin
 /// [`drop`]: Drop::drop
+#[deprecated(
+    since = "0.1.1",
+    note = "this macro is not safe; use pin-project or pin-project-lite crate instead"
+)]
 #[macro_export]
 macro_rules! unsafe_pinned {
     ($f:tt: $t:ty) => {
@@ -81,6 +85,10 @@ macro_rules! unsafe_pinned {
 /// avoid consuming the [`Pin`].
 ///
 /// [`Pin`]: core::pin::Pin
+#[deprecated(
+    since = "0.1.1",
+    note = "this macro is not safe; use pin-project or pin-project-lite crate instead"
+)]
 #[macro_export]
 macro_rules! unsafe_unpinned {
     ($f:tt: $t:ty) => {
