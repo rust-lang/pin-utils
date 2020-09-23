@@ -19,7 +19,7 @@ macro_rules! pin_mut {
         // ever again.
         #[allow(unused_mut)]
         let mut $x = unsafe {
-            $crate::core_reexport::pin::Pin::new_unchecked(&mut $x)
+            $crate::__private::Pin::new_unchecked(&mut $x)
         };
     )* }
 }

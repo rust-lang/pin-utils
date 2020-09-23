@@ -45,9 +45,9 @@ macro_rules! unsafe_pinned {
     ($f:tt: $t:ty) => {
         #[allow(unsafe_code)]
         fn $f<'__a>(
-            self: $crate::core_reexport::pin::Pin<&'__a mut Self>,
-        ) -> $crate::core_reexport::pin::Pin<&'__a mut $t> {
-            unsafe { $crate::core_reexport::pin::Pin::map_unchecked_mut(self, |x| &mut x.$f) }
+            self: $crate::__private::Pin<&'__a mut Self>,
+        ) -> $crate::__private::Pin<&'__a mut $t> {
+            unsafe { $crate::__private::Pin::map_unchecked_mut(self, |x| &mut x.$f) }
         }
     };
 }
@@ -93,8 +93,8 @@ macro_rules! unsafe_pinned {
 macro_rules! unsafe_unpinned {
     ($f:tt: $t:ty) => {
         #[allow(unsafe_code)]
-        fn $f<'__a>(self: $crate::core_reexport::pin::Pin<&'__a mut Self>) -> &'__a mut $t {
-            unsafe { &mut $crate::core_reexport::pin::Pin::get_unchecked_mut(self).$f }
+        fn $f<'__a>(self: $crate::__private::Pin<&'__a mut Self>) -> &'__a mut $t {
+            unsafe { &mut $crate::__private::Pin::get_unchecked_mut(self).$f }
         }
     };
 }
