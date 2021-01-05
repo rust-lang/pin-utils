@@ -5,9 +5,12 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: "0 1 * * *"
 
 env:
-  RUSTFLAGS: -Dwarnings
+  RUSTFLAGS: -D warnings
+  RUST_BACKTRACE: 1
 
 jobs:
   test:
@@ -61,4 +64,4 @@ jobs:
       - name: Install Rust
         run: rustup update nightly && rustup default nightly
       - name: cargo doc
-        run: RUSTDOCFLAGS=-Dwarnings cargo doc --no-deps
+        run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps
