@@ -1,9 +1,7 @@
 //! Utilities for pinning
 
 #![no_std]
-#![warn(missing_docs, missing_debug_implementations)]
-#![deny(bare_trait_objects)]
-#![allow(unknown_lints)]
+#![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
 
 #[macro_use]
 mod stack_pin;
