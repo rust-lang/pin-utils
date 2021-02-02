@@ -1,5 +1,7 @@
 /// Pins a value on the stack.
 ///
+/// Can safely pin values that are not `Unpin` by taking ownership.
+///
 /// # Example
 ///
 /// ```rust
