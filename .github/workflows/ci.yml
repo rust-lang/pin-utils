@@ -1,5 +1,8 @@
 name: CI
 
+permissions:
+  contents: read
+
 on:
   pull_request:
   push:
@@ -9,12 +12,20 @@ on:
     - cron: "0 1 * * *"
 
 env:
-  RUSTFLAGS: -D warnings
+  CARGO_INCREMENTAL: 0
+  CARGO_NET_RETRY: 10
+  CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
+  RUSTDOCFLAGS: -D warnings
+  RUSTFLAGS: -D warnings
+  RUSTUP_MAX_RETRIES: 10
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   test:
-    name: test
     strategy:
       matrix:
         rust:
@@ -27,41 +38,33 @@ jobs:
           - nightly
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Install Rust
         run: rustup update ${{ matrix.rust }} && rustup default ${{ matrix.rust }}
-      - name: cargo test
-        run: |
-          cargo build
-          cargo test
-          cargo test --release
+      - run: cargo build
+      - run: cargo test
+      - run: cargo test --release
 
   clippy:
-    name: clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Install Rust
-        run: rustup update stable && rustup default stable
-      - name: cargo clippy
-        run: cargo clippy --all --all-targets
+        run: rustup update stable
+      - run: cargo clippy --all --all-targets
 
   rustfmt:
-    name: rustfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Install Rust
-        run: rustup update stable && rustup default stable
-      - name: cargo fmt
-        run: cargo fmt --all -- --check
+        run: rustup update stable
+      - run: cargo fmt --all --check
 
   rustdoc:
-    name: rustdoc
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - name: Install Rust
         run: rustup update nightly && rustup default nightly
-      - name: cargo doc
-        run: RUSTDOCFLAGS="-D warnings" cargo doc --no-deps
+      - run: cargo doc --no-deps
