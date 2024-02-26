@@ -1,7 +1,6 @@
 #![allow(deprecated)]
 
 use pin_utils::{pin_mut, unsafe_pinned, unsafe_unpinned};
-use std::marker::Unpin;
 use std::pin::Pin;
 
 struct Foo<T1, T2> {
