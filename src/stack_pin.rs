@@ -2,6 +2,9 @@
 ///
 /// Can safely pin values that are not `Unpin` by taking ownership.
 ///
+/// **Note:** Since Rust 1.68, this macro is soft-deprecated in favor of
+/// [`pin!`](core::pin::pin) macro in the standard library.
+///
 /// # Example
 ///
 /// ```rust

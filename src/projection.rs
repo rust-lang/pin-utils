@@ -38,7 +38,7 @@
 /// [`drop`]: Drop::drop
 #[deprecated(
     since = "0.1.1",
-    note = "this macro is not safe; use pin-project or pin-project-lite crate instead"
+    note = "this macro is not safe; use safe pin-project or pin-project-lite crate instead"
 )]
 #[macro_export]
 macro_rules! unsafe_pinned {
@@ -87,7 +87,7 @@ macro_rules! unsafe_pinned {
 /// [`Pin`]: core::pin::Pin
 #[deprecated(
     since = "0.1.1",
-    note = "this macro is not safe; use pin-project or pin-project-lite crate instead"
+    note = "this macro is not safe; use safe pin-project or pin-project-lite crate instead"
 )]
 #[macro_export]
 macro_rules! unsafe_unpinned {
